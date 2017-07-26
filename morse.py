@@ -108,13 +108,13 @@ w2m_dict = { "ア" : "--.--",
              "。" : ".-.-..", #Full stop
              " " : "" }
 
-def katakana_full_size(s):
+def simplify_codepoints(s):
   result = []
   for c in s:
     if c in w2m_dict:
       result.append(c)
       continue
-    name = u.name(c)
+    name = u.name(c,"")
     if "KATAKANA LETTER" in name:
       result.append(u.lookup(name.replace("HALFWIDTH ","").replace("SMALL ","")))
     elif "FULLWIDTH" in name:
@@ -124,7 +124,7 @@ def katakana_full_size(s):
   return "".join(result)
 
 def text2morse(s,wabun = False):
-  s = katakana_full_size(u.normalize('NFD',s).upper())
+  s = simplify_codepoints(u.normalize('NFD',s).upper())
   result = []
   run = False
   run_code = []
