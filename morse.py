@@ -2,32 +2,32 @@
 import unicodedata as u
 
 
-t2m_dict = { "a" : ".-",
-             "b" : "-...",
-             "c" : "-.-.",
-             "d" : "-..",
-             "e" : ".",
-             "f" : "..-.",
-             "g" : "--.",
-             "h" : "....",
-             "i" : "..",
-             "j" : ".---",
-             "k" : "-.-",
-             "l" : ".-..",
-             "m" : "--",
-             "n" : "-.",
-             "o" : "---",
-             "p" : ".--.",
-             "q" : "--.-",
-             "r" : ".-.",
-             "s" : "...",
-             "t" : "-",
-             "u" : "..-",
-             "v" : "...-",
-             "w" : ".--",
-             "x" : "-..-",
-             "y" : "-.--",
-             "z" : "--..",
+t2m_dict = { "A" : ".-",
+             "B" : "-...",
+             "C" : "-.-.",
+             "D" : "-..",
+             "E" : ".",
+             "F" : "..-.",
+             "G" : "--.",
+             "H" : "....",
+             "I" : "..",
+             "J" : ".---",
+             "K" : "-.-",
+             "L" : ".-..",
+             "M" : "--",
+             "N" : "-.",
+             "O" : "---",
+             "P" : ".--.",
+             "Q" : "--.-",
+             "R" : ".-.",
+             "S" : "...",
+             "T" : "-",
+             "U" : "..-",
+             "V" : "...-",
+             "W" : ".--",
+             "X" : "-..-",
+             "Y" : "-.--",
+             "Z" : "--..",
              "1" : ".----",
              "2" : "..---",
              "3" : "...--",
@@ -113,7 +113,7 @@ def text2morse(s,wabun = False):
   result = []
   run = False
   run_code = []
-  for c in s.lower():
+  for c in s.upper():
     if run:
       if c == " " or c == "\n" or c == "_":
         code = "".join(run_code)
@@ -173,14 +173,16 @@ def morse2text(s,wabun = False):
           c = ")"
         parentesis = not parentesis
      
-      result.append(c)
       if c == "WABUN:":
         wabun = True
+        continue
+      result.append(c)
     elif wabun and w in m2w_dict:
       c = m2w_dict[w]
-      result.append(c)
       if c == "EOT\n":
         wabun = False
+        continue
+      result.append(c)
     else:
       result.append("¿")
   return (wabun, "".join(result))
