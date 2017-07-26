@@ -136,9 +136,9 @@ def text2morse(s,wabun = False):
         run_code = []
         run = False
         if code in m2t_dict:
-          if m2t_dict[code] == "WABUN:":
+          if m2t_dict[code] == "_JN_":
             wabun = True
-          elif m2t_dict[code] == "EOT\n":
+          elif m2t_dict[code] == "_SK_":
             wabun = False
       if c == "_":
         continue
