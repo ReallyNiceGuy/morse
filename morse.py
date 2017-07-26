@@ -110,10 +110,11 @@ w2m_dict = { "ア" : "--.--",
 
 
 def text2morse(s,wabun = False):
+  s = u.normalize('NFD',s).upper()
   result = []
   run = False
   run_code = []
-  for c in s.upper():
+  for c in s:
     if run:
       if c == " " or c == "\n" or c == "_":
         code = "".join(run_code)
@@ -161,6 +162,7 @@ m2w_dict = dict(zip(w2m_dict.values(),w2m_dict.keys()))
 m2w_dict[text2morse("_SK_")[1]] = "EOT\n"
 
 def morse2text(s,wabun = False):
+  s = s.replace("\n","")
   result = []
   parentesis = False
   for w in s.split(" "):
@@ -192,7 +194,7 @@ if __name__ == "__main__":
   wabun = False
   for s in sys.stdin.readlines():
     if len(sys.argv)>1 and sys.argv[1] == "-d":
-      wabun, text = morse2text(s.replace("\n",""),wabun)
+      wabun, text = morse2text(s,wabun)
     else:
-      wabun, text = text2morse(u.normalize('NFD',s),wabun)
+      wabun, text = text2morse(s,wabun)
     print(text)
