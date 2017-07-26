@@ -209,6 +209,7 @@ if __name__ == "__main__":
   for s in sys.stdin.readlines():
     if len(sys.argv)>1 and sys.argv[1] == "-d":
       wabun, text = morse2text(s,wabun)
+      print(text,end="")
     else:
       wabun, text = text2morse(s,wabun)
-    print(text)
+      print(text)
