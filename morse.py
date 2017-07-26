@@ -160,20 +160,20 @@ m2t_dict = dict(zip(t2m_dict.values(),t2m_dict.keys()))
 #Special case parentesis
 m2t_dict["-.--.-"]="()"
 #Pro signs
-m2t_dict[text2morse("_SOS_")[1]] = "MAYDAY!"
-m2t_dict[text2morse("_SK_")[1]] = "EOT\n"
-m2t_dict[text2morse("_AR_")[1]] = "\nEOM\n"
-m2t_dict[text2morse("_AS_")[1]] = "\nWAIT\n"
-m2t_dict[text2morse("_BT_")[1]] = "\n\n"
-m2t_dict[text2morse("_CT_")[1]] = "\nBOM\n"
-m2t_dict[text2morse("_JN_")[1]] = "WABUN:"
-m2t_dict[text2morse("_KN_")[1]] = "CALLING"
-m2t_dict[text2morse("_SN_")[1]] = "UNDERSTOOD"
-m2t_dict[text2morse("_HH_")[1]] = "*ERROR*"
+m2t_dict[text2morse("_SOS_")[1]] = "_SOS_"
+m2t_dict[text2morse("_SK_")[1]] = "_SK_"
+m2t_dict[text2morse("_AR_")[1]] = "_AR_"
+m2t_dict[text2morse("_AS_")[1]] = "_AS_"
+m2t_dict[text2morse("_BT_")[1]] = "_BT_"
+m2t_dict[text2morse("_CT_")[1]] = "_CT_"
+m2t_dict[text2morse("_JN_")[1]] = "_JN_"
+m2t_dict[text2morse("_KN_")[1]] = "_KN_"
+m2t_dict[text2morse("_SN_")[1]] = "_SN_"
+m2t_dict[text2morse("_HH_")[1]] = "_HH_"
 
 m2w_dict = dict(zip(w2m_dict.values(),w2m_dict.keys()))
 # Exit wabum mode
-m2w_dict[text2morse("_SK_")[1]] = "EOT\n"
+m2w_dict[text2morse("_SK_")[1]] = "_SK_"
 
 def morse2text(s,wabun = False):
   s = s.replace("\n","")
@@ -189,15 +189,13 @@ def morse2text(s,wabun = False):
           c = ")"
         parentesis = not parentesis
      
-      if c == "WABUN:":
+      if c == "_JN_":
         wabun = True
-        continue
       result.append(c)
     elif wabun and w in m2w_dict:
       c = m2w_dict[w]
-      if c == "EOT\n":
+      if c == "_SK_":
         wabun = False
-        continue
       result.append(c)
     else:
       result.append("¿")
