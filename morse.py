@@ -117,6 +117,8 @@ def katakana_full_size(s):
     name = u.name(c)
     if "KATAKANA LETTER" in name:
       result.append(u.lookup(name.replace("HALFWIDTH ","").replace("SMALL ","")))
+    elif "FULLWIDTH LATIN" in name:
+      result.append(u.lookup(name.replace("FULLWIDTH ","")))
     else:
       result.append(c)
   return "".join(result)
